@@ -1,0 +1,27 @@
+version: '3'
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_PORT=5432
+      - DB_USERNAME=bosandon
+      - DB_PASSWORD=passwor
+      - DB_NAME=prueba_falp
+    depends_on:
+      - db
+  db:
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=bosandon
+      - POSTGRES_PASSWORD=passwor
+      - POSTGRES_DB=prueba_falp
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
